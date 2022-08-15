@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ColorBlock from "./ColorBlock";
+import ColorForm from "./ColorForm";
+
+const default_colors = ['violet', 'blue', 'lightblue', 'green', 'greenyellow', 'yellow', 'orange', 'red']
+
+
 
 function App() {
+  const [colors, setColors] = useState(default_colors);
+
+const handleAddColor = (newColor) => {
+  setColors([...colors, newColor]);
+}
+
+  const colorMap = colors.map(c => <ColorBlock color={c} />)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {colorMap}
+      <ColorForm addColor={handleAddColor}/>
     </div>
-  );
+  )
 }
+
 
 export default App;
